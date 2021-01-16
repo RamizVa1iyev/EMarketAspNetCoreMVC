@@ -1,0 +1,45 @@
+﻿@using Entities.DomainModels
+@model CartListViewModel
+
+
+<h3>Your Cart</h3>
+
+@if (Model.Cart.CartLines.Count == 0)
+{
+    <h2 class="badge badge-danger">Your Cart is Empty</h2>
+}
+else
+{
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Units In Stock</th>
+            <th scope="col">Quantity Per Unit</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Quantity</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var cartLine in Model.Cart.CartLines)
+        {
+            <tr>
+                <th scope="row">@cartLine.Product.ProductId</th>
+                <td>@cartLine.Product.ProductName</td>
+                <td>@cartLine.Product.UnitsInStock</td>
+                <td>@cartLine.Product.QuantityPerUnit</td>
+                <td>@cartLine.Product.UnitPrice</td>
+                <td>@cartLine.Quantity</td>
+                <td><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId">Remove</a></td>
+            </tr>
+           
+        }
+        <tr>
+            <th>Total</th>
+            <td>@Model.Cart.Total</td>
+        </tr>
+        </tbody>
+    </table>
+}

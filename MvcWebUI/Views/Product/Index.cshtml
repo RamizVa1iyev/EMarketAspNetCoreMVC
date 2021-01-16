@@ -1,0 +1,35 @@
+﻿@model ProductListViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Product List</h2>
+
+<table class="table table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Units In Stock</th>
+            <th scope="col">Quantity Per Unit</th>
+            <th scope="col">Unit Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <th scope="row">@product.ProductId</th>
+                <td>@product.ProductName</td>
+                <td>@product.UnitsInStock</td>
+                <td>@product.QuantityPerUnit</td>
+                <td>@product.UnitPrice</td>
+                <td><a class="btn btn-sm btn-success" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId">Add To Cart</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
